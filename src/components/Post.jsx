@@ -10,7 +10,7 @@ const Post = ({ post }) => {
 
   const commentInputRef = useRef(null);
 
-  // Function to focus the input when the icon is clicked
+
   const focusCommentInput = () => {
     commentInputRef.current.focus();
   };

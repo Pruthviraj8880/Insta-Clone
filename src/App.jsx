@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'; // Consolidated React imports
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Stories from './components/Stories';
 import Post from './components/Post';
 import Suggestions from './components/Suggestions';
-import { POSTS } from './data'; // Only import this once
+import { POSTS } from './data';
 import './App.css';
 
 function App() {
@@ -13,11 +13,11 @@ function App() {
   useEffect(() => {
     // Simulate a network delay
     const timer = setTimeout(() => {
-      setPosts(POSTS); // Use the imported POSTS here
+      setPosts(POSTS);
       setLoading(false);
     }, 1000);
     
-    return () => clearTimeout(timer); // Good practice to clear timeouts
+    return () => clearTimeout(timer); 
   }, []);
 
   if (loading) return <div className="loading">Loading Instagram...</div>;
