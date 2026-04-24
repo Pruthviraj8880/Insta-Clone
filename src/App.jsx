@@ -1,38 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Consolidated React imports
 import Navbar from './components/Navbar';
 import Stories from './components/Stories';
-import Post from './components/post';
+import Post from './components/Post';
 import Suggestions from './components/Suggestions';
-import { POSTS } from './data';
+import { POSTS } from './data'; // Only import this once
 import './App.css';
-import { useState, useEffect } from 'react';
-import { POSTS as mockData } from './data';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate a network delay of 1 second
-    setTimeout(() => {
-      setPosts(mockData);
+    // Simulate a network delay
+    const timer = setTimeout(() => {
+      setPosts(POSTS); // Use the imported POSTS here
       setLoading(false);
     }, 1000);
+    
+    return () => clearTimeout(timer); // Good practice to clear timeouts
   }, []);
 
   if (loading) return <div className="loading">Loading Instagram...</div>;
+
   return (
     <div className="App">
       <Navbar />
       <main className="main-content">
         <div className="feed-section">
           <Stories />
-          {POSTS.map(post => (
+          {/* IMPORTANT: Map over 'posts' (state), not 'POSTS' (static data) */}
+          {posts.map(post => (
             <Post key={post.id} post={post} />
           ))}
         </div>
         
-        {/* Sidebar only visible on larger screens */}
         <div className="sidebar-section">
           <Suggestions />
         </div>
